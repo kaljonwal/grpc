@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package greet;
+
+option go_package = "kalyan/greet/proto";
+
+
+message GreetRequest{
+    string first_name = 1;
+}
+
+message GreetResponse{
+    string result = 1;
+}
+
+message CalculatorRequest{
+    int64 Number1 = 1;
+    int64 Number2 = 2;
+}
+
+message CalculatorResponse{
+    int64 Result = 1;
+}
+
+message PrimeRequest{
+    int64 Number1 = 1;
+}
+
+message PrimeResponse{
+    int64 result = 1;
+}
+
+service GreetService{
+    rpc Greet (GreetRequest) returns (GreetResponse);
+    rpc SumRpc (CalculatorRequest) returns (CalculatorResponse);
+    rpc GreetServerStreaming (GreetRequest) returns (stream GreetResponse);
+    rpc CalculatePrimeNumbers (PrimeRequest) returns (stream PrimeResponse);
+    rpc LongGreet (stream GreetRequest) returns (GreetResponse);
+    rpc AvgRpc (stream PrimeRequest) returns (PrimeResponse);
+    rpc GreetEveryone (stream GreetRequest) returns (stream GreetResponse);
+}
